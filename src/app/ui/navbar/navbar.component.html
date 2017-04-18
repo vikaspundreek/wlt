@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+ 
+    <!-- Brand and toggle get grouped for better mobile display -->
+       <a class="navbar-brand" href="#">WLT</a>
+      <ul class="nav navbar-nav">
+        <li><a routerLink="create-user">Add</a></li>
+        <li><a href="#">Test</a></li> 
+      </ul> 
+      <ul class="nav navbar-nav navbar-right">
+       
+         <li><a href="#">Settings</a></li>
+         <li *ngIf='showLogOut'><a (click)="onClickLogut()">Logout</a></li>
+        
+      </ul>  
+</nav>

@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h2>LOGIN TO YOUR ACCOUNT</h2>
+    <form (ngSubmit)="login()" [formGroup]="form">
+      <div class="form-group">
+        <div class="input-group">
+        <input type="text" class="form-control"  placeholder="email@domain.com"  aria-label="..." formControlName="loginUserName" required minlength="3" 
+          id="loginUserName">
+        </div>
+        <div class="input-group">
+          <input type="password" class="form-control"  placeholder="password"  aria-label="..." formControlName="loginPassword" required minlength="8" 
+          id="loginPassword">
+
+        </div>
+        <div *ngIf="form.controls.loginUserName.touched && form.controls.loginUserName.errors">
+          <div class="alert alert-danger" *ngIf="form.controls.loginUserName.errors.required">
+            Username should be filled
+          </div>
+          <div class="alert alert-danger" *ngIf="form.controls.loginUserName.errors.minlength">
+            Username should be minimum {{form.controls.loginUserName.errors.minlength.requiredLength}} character
+          </div>
+        </div>
+         <div *ngIf="authenticationError && !form.touched">
+          <div class="alert alert-danger">
+            Username and Password is not valid.
+          </div>
+        </div>
+
+      </div>
+      <div class="input-group"><button [disabled]="!form.valid" class="btn btn-primary" type="submit">
+    Login</button></div>
+  
+  </form>
+
+
+
+</div>
+</div>

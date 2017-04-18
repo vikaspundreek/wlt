@@ -1,0 +1,84 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>CREATE ACCOUNT</h2>
+    <form (ngSubmit)="createUser()" [formGroup]="form">
+      <div class="form-group">
+
+        <div class="row input-group">
+          <div class="col-xs-4">
+            <label for="userEmail">Email</label>
+          </div>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" placeholder="email@domain.com" aria-label="..." formControlName="userEmail" required
+              minlength="3" id="userEmail">
+          </div>
+        </div>
+
+        <div class="row input-group">
+          <div class="col-xs-4">
+            <label for="userPassword">Password</label>
+          </div>
+          <div class="col-xs-8">
+            <input type="password" class="form-control" placeholder="password" aria-label="..." formControlName="userPassword" required
+              minlength="8" id="userPassword">
+          </div>
+
+
+        </div>
+
+         <div class="row input-group">
+          <div class="col-xs-4">
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <div class="col-xs-8">
+            <input type="password" class="form-control" placeholder="password" aria-label="..." formControlName="confirmPassword" required
+              minlength="8" id="confirmPassword">
+          </div>
+
+
+        </div>
+        <div *ngIf="form.controls.userEmail.touched && form.controls.userEmail.errors">
+          <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.required">
+            Username should be filled
+          </div>
+          <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.minlength">
+            Username should be minimum {{form.controls.userEmail.errors.minlength.requiredLength}} character
+          </div>
+        </div>
+
+        <div class="row input-group">
+          <div class="col-xs-4">
+            <label for="userPassword">Primary Language</label>
+          </div>
+          <div class="col-xs-8">
+            <select class="form-control" id="primaryLanguage" formControlName="primaryLanguage" [(ngModel)]="defaultPrimaryLangauge">
+                <option *ngFor="let language of languages" value="{{ language.name }}">
+                {{language.name }}
+                </option> 
+                </select> 
+          </div> 
+        </div>
+
+        <div class="row input-group">
+          <div class="col-xs-4">
+            <label for="userPassword">Secondary Language</label>
+          </div>
+          <div class="col-xs-8">
+            <select class="form-control" id="secondaryLanguage" formControlName="secondaryLanguage" [(ngModel)]="defaultSecondaryLangauge">
+                <option *ngFor="let language of languages" value="{{ language.name }}">
+                {{language.name }}
+                </option> 
+                </select> 
+          </div> 
+        </div>
+      </div>
+ 
+      <div class="input-group"><button [disabled]="!form.valid" class="btn btn-primary" type="submit">
+    Create</button></div>
+
+    </form>
+
+
+
+  </div>
+</div>
