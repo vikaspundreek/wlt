@@ -6,11 +6,35 @@
 
         <div class="row input-group">
           <div class="col-xs-4">
+            <label for="userName">Name</label>
+          </div>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" placeholder="User Name" aria-label="..." formControlName="userName" id="userName"> 
+              <div class="alert alert-danger" *ngIf="form.controls.userName.touched &&  form.controls.userName.errors && form.controls.userName.errors.required">
+                User name should be filled
+              </div> 
+          </div>
+        </div>
+
+
+        <div class="row input-group">
+          <div class="col-xs-4">
             <label for="userEmail">Email</label>
           </div>
           <div class="col-xs-8">
             <input type="text" class="form-control" placeholder="email@domain.com" aria-label="..." formControlName="userEmail" required
-              minlength="3" id="userEmail">
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="userEmail">
+            <div *ngIf="form.controls.userEmail.touched && form.controls.userEmail.errors">
+              <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.required || form.controls.userEmail.errors.pattern">
+                User email should be filled with a valid email address
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.minlength">
+                User email should be minimum {{form.controls.userEmail.errors.minlength.requiredLength}} character
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.validateEmail">
+                This email address already exist in our data. Please choose another email id of sign in with this id
+              </div>
+            </div>
           </div>
         </div>
 
@@ -21,30 +45,40 @@
           <div class="col-xs-8">
             <input type="password" class="form-control" placeholder="password" aria-label="..." formControlName="userPassword" required
               minlength="8" id="userPassword">
+            <div *ngIf="form.controls.userPassword.touched && form.controls.userPassword.errors">
+              <div class="alert alert-danger" *ngIf="form.controls.userPassword.errors.required">
+                Password should be filled
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.userPassword.errors.complexPassword">
+                Password should be minimum {{form.controls.userPassword.errors.complexPassword.minLength}} character
+              </div>
+            </div>
           </div>
-
 
         </div>
 
-         <div class="row input-group">
+        <div class="row input-group">
           <div class="col-xs-4">
             <label for="confirmPassword">Confirm Password</label>
           </div>
           <div class="col-xs-8">
-            <input type="password" class="form-control" placeholder="Confirm password" aria-label="..." formControlName="confirmPassword" required
-              minlength="8" id="confirmPassword">
+            <input type="password" class="form-control" placeholder="Confirm password" aria-label="..." formControlName="confirmPassword"
+              required minlength="8" id="confirmPassword">
+
+            <div *ngIf="form.controls.confirmPassword.touched && form.errors">
+              <div class="alert alert-danger" *ngIf="form.errors.confirmPasswordMatch">
+                Confirm password doesnt match
+              </div>
+            </div>
           </div>
 
 
         </div>
-        <div *ngIf="form.controls.userEmail.touched && form.controls.userEmail.errors">
-          <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.required">
-            Username should be filled
-          </div>
-          <div class="alert alert-danger" *ngIf="form.controls.userEmail.errors.minlength">
-            Username should be minimum {{form.controls.userEmail.errors.minlength.requiredLength}} character
-          </div>
-        </div>
+
+
+
+
+
 
         <div class="row input-group">
           <div class="col-xs-4">
@@ -55,8 +89,8 @@
                 <option *ngFor="let language of languages" value="{{ language.name }}">
                 {{language.name }}
                 </option> 
-                </select> 
-          </div> 
+                </select>
+          </div>
         </div>
 
         <div class="row input-group">
@@ -68,17 +102,15 @@
                 <option *ngFor="let language of languages" value="{{ language.name }}">
                 {{language.name }}
                 </option> 
-                </select> 
-          </div> 
+                </select>
+          </div>
         </div>
       </div>
- 
-      <div class="input-group"><button [disabled]="!form.valid" class="btn btn-primary" type="submit">
-    Create</button></div>
 
+      <div class="input-group">
+        <button [disabled]="!form.valid" class="btn btn-primary" type="submit">Create</button>
+      </div>
     </form>
-
-
 
   </div>
 </div>

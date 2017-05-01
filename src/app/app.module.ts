@@ -12,13 +12,18 @@ import { AuthenticationService } from './services/index';
 import {LanguagesService} from './services/index';
 import {AuthGaurdService} from './services/index';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {PasswordValidator,UseremailValidator, ConfigurationService} from './services/index'; 
+import {CreateUserService} from "./create-user/create-user.service";
+import { AddWordComponent } from './add-word/add-word.component'
+
 @NgModule({
   declarations: [
     AppComponent,
     CreateUserComponent,
     NavbarComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddWordComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpModule,
     routing
   ],
-  providers: [AuthenticationService, AuthGaurdService, LanguagesService],
+  providers: [
+    AuthenticationService, 
+    CreateUserService,
+    AuthGaurdService, 
+    LanguagesService, 
+    PasswordValidator, 
+    UseremailValidator ,
+    ConfigurationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

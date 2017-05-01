@@ -1,0 +1,36 @@
+<form (ngSubmit)="addWord()" [formGroup]="form">
+    <div class="form-group">
+        <div class="row input-group">
+            <div class="col-xs-4">
+                <select class="form-control" id="secondaryLanguage" formControlName="secondaryLanguage" [(ngModel)]="defaultSecondaryLangauge">
+                    <option *ngFor="let language of languages" value="{{ language.name }}">
+                    {{language.name }}
+                    </option> 
+                </select>
+          
+            </div>
+            <div class="col-xs-8">
+                <input type="text" class="form-control" placeholder="" aria-label="..." formControlName="secondaryLanguage" id="secondaryLanguage"> 
+              <div class="alert alert-danger" *ngIf="form.controls.secondaryLanguage.touched &&  form.controls.secondaryLanguage.errors && form.controls.secondaryLanguage.errors.required">
+                 Word should be filled 
+              </div>
+            </div>
+        </div>
+        <div class="row input-group">
+            <div class="col-xs-4">
+                <select class="form-control" id="primaryLanguage" formControlName="primaryLanguage" [(ngModel)]="defaultPrimaryLangauge">
+                    <option *ngFor="let language of languages" value="{{ language.name }}">
+                    {{language.name }}
+                    </option> 
+                </select>
+          
+            </div>
+            <div class="col-xs-8">
+                <input type="text" class="form-control" placeholder="" aria-label="..." formControlName="primaryWord" id="primaryWord"> 
+              <div class="alert alert-danger" *ngIf="form.controls.primaryWord.touched &&  form.controls.primaryWord.errors && form.controls.primaryWord.errors.required">
+                Primary word should be filled 
+              </div>
+            </div>
+        </div>
+    </div>
+</form>

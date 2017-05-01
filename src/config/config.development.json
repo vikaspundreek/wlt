@@ -1,0 +1,21 @@
+{
+    "_comment" : "This basic local configuration",
+    "appVersionNumber" : "1.0.0",
+    "apiBaseUri": "http://localhost:7000/",
+    "restApiCalls": [{
+            "name": "createUser",
+            "details": {
+                "apiCallType": "POST",
+                "apiUriStub": "users",
+                "apiResourceType": "user"
+            }
+        }],
+    "restApiHeaders": [
+        { "id": "createUser",
+          "parameters": {
+                "accept": "application/json",
+                "contentType": "application/json"
+          }
+        } 
+    ]
+}

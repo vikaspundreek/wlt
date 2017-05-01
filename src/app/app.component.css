@@ -1,0 +1,8 @@
+.alert-danger{
+    background:transparent;
+    color:#F00;
+    padding:0px;
+}
+.alert{
+    font-style:italic;
+}

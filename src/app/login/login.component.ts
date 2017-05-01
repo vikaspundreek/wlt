@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthenticationService } from '../services/index';
+import { AuthenticationService, ConfigurationService } from '../services/index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable'; 
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private configurationService: ConfigurationService
   ) { }
 
 
@@ -30,23 +33,28 @@ export class LoginComponent implements OnInit {
       loginUserName: new FormControl(),
       loginPassword: new FormControl
     });
+    //this.configurationService.load();
+    //console.log(this.configurationService.configuration());
   }
 
 
   login() {
     this.loading = true;
-    this.authenticationService.login(this.form._value.loginUserName, this.form._value.loginPassword)
-      .subscribe(
-      data => {
-        this.router.navigate([this.targetUrl]);
-      },
+  
+    var d = this.authenticationService.login(this.form._value.loginUserName, this.form._value.loginPassword);
+ 
+ 
+    d.catch(
       error => {
-        console.log(this.form);
         this.loading = false;
         this.form.reset();
         this.authenticationError = true;
       }
-      )
+      ).then(
+      data => {
+        this.router.navigate([this.targetUrl]);
+      })
+      ; 
   }
 
 
